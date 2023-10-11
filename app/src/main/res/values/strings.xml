@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">RGIS Vision Sample</string>
+
+    <string name="launch_rgis_vision">Launch RGIS Vision</string>
+    <string name="response_from_rgis_vision">Response From RGIS Vision</string>
+    <string name="select_database">Select Database</string>
+    <string name="select_search_column">Select Search Column</string>
+    <string name="select_description_column">Select Description Column</string>
+    <string name="select_table">Select Table</string>
+
+    <string name="rgis_vision_app_package">com.spyglass.rgisvision</string>
+    <string name="rgis_vision_app_scanner_activity">com.spyglass.rgisvision.presentation.view.scanner.ScannerActivity</string>
+
+    <string name="key_database_file_path">database_file_path</string>
+    <string name="key_table_name">table_name</string>
+    <string name="key_search_column">search_column</string>
+    <string name="key_description_column">description_column</string>
+    <string name="key_rgis_vision_response">rgis_vision_response</string>
+    <string name="key_rgis_vision_exception">rgis_vision_exception</string>
+    <string name="key_rgis_vision_response_json">rgis_vision_response_json</string>
+
+    <string name="error_please_select_database">Please select database</string>
+    <string name="error_please_select_table">Please select table</string>
+    <string name="error_please_select_search_column">Please select search column</string>
+    <string name="error_please_select_description_column">Please select description column</string>
+    <string name="error_rgis_vision_app_not_found">RGIS Vision App not found.</string>
+    <string name="error_database_cannot_open">Database cannot open</string>
+</resources>
