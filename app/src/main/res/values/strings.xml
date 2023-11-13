@@ -11,6 +11,7 @@
     <string name="rgis_vision_app_package">com.spyglass.rgisvision</string>
     <string name="rgis_vision_app_scanner_activity">com.spyglass.rgisvision.presentation.view.scanner.ScannerActivity</string>
 
+    <string name="key_config_file_path">config_file_path</string>
     <string name="key_database_file_path">database_file_path</string>
     <string name="key_table_name">table_name</string>
     <string name="key_search_column">search_column</string>
@@ -25,4 +26,5 @@
     <string name="error_please_select_description_column">Please select description column</string>
     <string name="error_rgis_vision_app_not_found">RGIS Vision App not found.</string>
     <string name="error_database_cannot_open">Database cannot open</string>
+    <string name="select_config_json_file">Select Config File (Optional)</string>
 </resources>

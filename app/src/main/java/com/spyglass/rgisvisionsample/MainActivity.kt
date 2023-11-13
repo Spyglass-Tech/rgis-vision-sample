@@ -10,7 +10,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -18,6 +17,7 @@ import android.provider.Settings
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var selectedDatabasePath: String? = null
+    private var selectedConfigPath: String? = null
     private var selectedTable: String? = null
     private var selectedSearchColumn: String? = null
     private var selectedDescriptionColumn: String? = null
@@ -42,6 +43,19 @@ class MainActivity : AppCompatActivity() {
                     FileUtils(this@MainActivity).getPath(it)?.let { databasePath ->
                         binding.tvSelectedDatabasePath.text = databasePath
                         openDatabase(File(databasePath))
+                    }
+                }
+            }
+        }
+
+    private val selectConfigLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                data?.data?.let {
+                    FileUtils(this@MainActivity).getPath(it)?.let { configPath ->
+                        binding.tvSelectedConfigPath.text = configPath
+                        selectedConfigPath = configPath
                     }
                 }
             }
@@ -86,6 +100,14 @@ class MainActivity : AppCompatActivity() {
                 launchSelectDatabaseIntent()
             }
         }
+
+        binding.btnSelectConfig.setOnClickListener {
+            if (checkReadStoragePermission().not()) {
+                requestReadStoragePermission()
+            } else {
+                launchSelectConfigIntent()
+            }
+        }
     }
 
     private fun launchSelectDatabaseIntent() {
@@ -95,6 +117,15 @@ class MainActivity : AppCompatActivity() {
             putExtra(DocumentsContract.EXTRA_INITIAL_URI, true)
         }
         selectDatabaseLauncher.launch(intent)
+    }
+
+    private fun launchSelectConfigIntent() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type = "*/*"
+            addCategory(Intent.CATEGORY_OPENABLE)
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, true)
+        }
+        selectConfigLauncher.launch(intent)
     }
 
     private fun openDatabase(databaseFile: File) {
@@ -179,6 +210,7 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.rgis_vision_app_scanner_activity)
             )
 
+            putExtra(getString(R.string.key_config_file_path), selectedConfigPath)
             putExtra(getString(R.string.key_database_file_path), selectedDatabasePath)
             putExtra(getString(R.string.key_table_name), selectedTable)
             putExtra(getString(R.string.key_search_column), selectedSearchColumn)

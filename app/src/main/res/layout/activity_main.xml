@@ -9,9 +9,22 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_select_config"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_config_json_file"
+        app:cornerRadius="8dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_selected_config_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_select_database"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/select_database"
         app:cornerRadius="8dp" />
 
